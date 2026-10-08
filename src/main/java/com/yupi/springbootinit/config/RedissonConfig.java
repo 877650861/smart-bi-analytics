@@ -1,6 +1,7 @@
 package com.yupi.springbootinit.config;
 
 import lombok.Data;
+import org.springframework.util.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
@@ -27,6 +28,9 @@ public class RedissonConfig {
         config.useSingleServer()
                 .setDatabase(database)
                 .setAddress("redis://" + host + ":" + port);
+        if (StringUtils.hasText(password)) {
+            config.useSingleServer().setPassword(password);
+        }
         RedissonClient redisson = Redisson.create(config);
         return redisson;
     }
