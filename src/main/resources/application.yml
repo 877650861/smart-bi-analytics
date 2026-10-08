@@ -21,6 +21,11 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/yubi?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai}
     username: ${SPRING_DATASOURCE_USERNAME:root}
     password: ${SPRING_DATASOURCE_PASSWORD:}
+  # 首次部署时自动创建业务表；脚本使用 IF NOT EXISTS，不会覆盖已有数据
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/schema.sql
   # Redis 配置
   # todo 需替换配置，然后取消注释
   redis:
